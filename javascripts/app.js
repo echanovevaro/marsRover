@@ -81,29 +81,24 @@ function turnRight(rover){
 	}
 }
 
-//No tiene por q ser necesario actualizar la posicion de rover, ya q se ha actualizado el grid y el travelLog y el bucle termina con el error,
-//TODO cambiar lo arrays del trabel log por objetos; recordar posicion inversa serpecto al grid.
 function actualizarGrid(rover){
-	var actualPosition = {row : rover.row, column: rover.column};	//Creada solo para recuperarla en el error tras resetear la posición del rover
+	var actualPosition = {row : rover.row, column: rover.column};
 	var previousPosition = rover.travelLog[rover.travelLog.length-1];
 
 	if(rover.row < latitudMin || rover.row > latitudMax || rover.column < longitudMin || rover.column > longitudMax){
 		rover.column = previousPosition.column;
 		rover.row = previousPosition.row;
 		throw new CustomError ("out of range at position " + JSON.stringify(actualPosition));
-	}else if(grid[rover.row][rover.column]){	// (!= null) Significa que en la posición indicada del grid no hay un null, es decir hay un objeto//mirar celda, escribe lo que hay en grid
+	}else if(grid[rover.row][rover.column]){
 		rover.column = previousPosition.column;
 		rover.row = previousPosition.row;
 		throw new CustomError (grid[actualPosition.row][actualPosition.column] +" found at position "  + JSON.stringify(actualPosition)) ;
 	} else {
-		//colocalo, espacio vacio; anterior rellenar con null
 		grid[rover.row][rover.column] = grid[previousPosition.row][previousPosition.column];
 		grid[previousPosition.row][previousPosition.column]=null;
 	}
 }
 
-//se puede comprobar en f y b que se mantenga en el grid y que no pase sobre otro objeto son tres ifs anidados x8; grueso.
-//TODO: cambiar ambas po switch.
 function moveForward(rover){
 	if(rover.direction == "N"){
 		rover.row--;
@@ -158,7 +153,6 @@ function moverRover(rover, movimiento){
 var recorrido1 = prompt("insert rover1 movements \n (f)orward, (r)ight, (l)eft or (b)ackwards.");
 var recorrido2 = prompt("insert rover2 movements \n (f)orward, (r)ight, (l)eft or (b)ackwards.");
 
-//posibilidad de eliminar variables buleanas vaciando los recorridos si hay error.
 var errorRover1 = false;
 var errorRover2 = false;
 
