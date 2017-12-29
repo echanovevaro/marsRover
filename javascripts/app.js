@@ -37,11 +37,7 @@ var longitudMin = 0;
 var latitudMax = 9;
 var latitudMin = 0;
 
-// ======================
-
-// ======================
 function turnLeft(rover){
-
 	switch(rover.direction){
 		case "N":
 			rover.direction ="W";
@@ -57,12 +53,10 @@ function turnLeft(rover){
 			break;
 		default:
 			throw new CustomError ("wrong direction" );
-
 	}
 }
 
 function turnRight(rover){
-
 	switch(rover.direction){
 		case "N":
 			rover.direction = "E";
